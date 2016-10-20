@@ -1,3 +1,4 @@
 from django.contrib import admin
+from restaurant_app.models import Employee, Item, Table, Order
 
-# Register your models here.
+admin.site.register([Employee, Item, Table, Order])
