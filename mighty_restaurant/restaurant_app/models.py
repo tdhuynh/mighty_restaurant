@@ -1,4 +1,6 @@
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 ACCESS_LEVELS = [
     ('o', 'owner'),
@@ -7,7 +9,15 @@ ACCESS_LEVELS = [
 ]
 
 
-class Employee(models.Model):
+@receiver(post_save, sender='auth.User')
+def create_user_profile(**kwargs):
+    created = kwargs.get('created')
+    instance = kwargs.get('instance')
+    if created:
+        Profile.objects.create(user=instance)
+
+
+class Profile(models.Model):
     user = models.OneToOneField('auth.User')
     access_level = models.CharField(max_length=1, default='s', choices=ACCESS_LEVELS)
 
@@ -20,7 +30,7 @@ class Item(models.Model):
     appetizer = models.BooleanField(default=False)
     entree = models.BooleanField(default=False)
     drink = models.BooleanField(default=False)
-    description = models.CharField(max_length=150)
+    description = models.CharField(max_length=150, null=True, blank=True)
     price = models.FloatField()
 
     def __str__(self):
@@ -39,7 +49,7 @@ class Order(models.Model):
     user = models.ForeignKey('auth.User')
     item = models.ForeignKey(Item)
     table = models.ForeignKey(Table)
-    notes = models.TextField()
+    notes = models.TextField(null=True, blank=True)
     completed = models.BooleanField(default=False)
 
     def __str__(self):
