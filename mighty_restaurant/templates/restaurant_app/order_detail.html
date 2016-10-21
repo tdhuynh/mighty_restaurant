@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% for order in object.cook_orders %}
+<a href="{% url 'cook_update_view' order.id %}">Complete</a>
+  {{ order.id }}
+  {{ order.item }}
+  {{ order.notes }}
+  {{ order.item.price }}
+  <br>
+
+{% endfor %}
+  {{ object.paid }}
+  {{ object.total }}
+
+{% endblock %}

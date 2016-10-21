@@ -79,17 +79,27 @@ class TableDetailView(DetailView):
 
 
 class CookDetailView(DetailView):
-    pass
+    model = Order
+
+
 
 class CookUpdateView(UpdateView):
     model = Order
     fields = ("completed",)
-    success_url = reverse_lazy('cook_update_view')
 
-    def get_object(self):
-        if  self.request.user.profile.is_cook:
-            return Order.objects.get(user=self.request.user)
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('cook_detail_view', args=[int(self.kwargs['pk'])])
 
-    def get_queryset(self):
-        if  self.request.user.profile.is_cook:
-            return Order.objects.all()
+    # def get_object(self):
+    #     if  self.request.user.profile.is_cook:
+    #         return Order.objects.get(user=self.request.user)
+    #
+    # def get_queryset(self):
+    #     if  self.request.user.profile.is_cook:
+    #         return Order.objects.all()
+
+    # def form_valid(self, form):
+    #     instance = form.save(commit=False)
+    #     instance.user = self.request.user
+    #     # instance.order = Order.objects.get(id=self.kwargs['pk'])
+    #     return super().form_valid(form)
