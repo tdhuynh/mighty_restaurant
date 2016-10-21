@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from restaurant_app.models import Order, Profile, Table, Item
+from django.urls import reverse_lazy
 
 
 class HomeView(ListView):
@@ -14,7 +15,7 @@ class HomeView(ListView):
 class UserCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = "/"
+    success_url = reverse_lazy("profile_update_view")
 
 
 class OrderCreateView(CreateView):
@@ -30,7 +31,7 @@ class OrderCreateView(CreateView):
 class ProfileUpdateView(UpdateView):
     template_name = 'profile.html'
     fields = ('access_level',)
-    success_url = '/'
+    success_url = reverse_lazy('home_view')
 
     def get_object(self):
         return Profile.objects.get(user=self.request.user)

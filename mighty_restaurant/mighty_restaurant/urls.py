@@ -6,7 +6,7 @@ from restaurant_app.views import UserCreateView, OrderCreateView, HomeView, Prof
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('django.contrib.auth.urls')),
-    url(r'^$', HomeView.as_view(), name='home_list_view'),
+    url(r'^$', HomeView.as_view(), name='home_view'),
     url(r'^order/$', OrderCreateView.as_view(), name='order_create_view'),
     url(r'^create_user/$', UserCreateView.as_view(), name='user_create_view'),
     url(r'^accounts/profile/$', ProfileUpdateView.as_view(), name='profile_update_view'),
