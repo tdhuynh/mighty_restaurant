@@ -1,6 +1,7 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.db.models import Sum
 
 ACCESS_LEVELS = [
     ('o', 'owner'),
@@ -52,10 +53,15 @@ class Item(models.Model):
 class Table(models.Model):
     paid = models.BooleanField(default=False)
 
+    def all_orders(self):
+        return Order.objects.filter(table=self)
+
     @property
     def total(self):
-        return sum(Order.objects.filter(table=self).filter(Order.item.price))
+        return sum(food.item.price for food in self.all_orders())
 
+    def __str__(self):
+        return str(self.id)
 
 class Order(models.Model):
     user = models.ForeignKey('auth.User')
@@ -64,7 +70,9 @@ class Order(models.Model):
     notes = models.TextField(null=True, blank=True)
     completed = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.user.username
-        return self.item
-        return self.table
+    # def __str__(self):
+    #     return "{} {}".format(self.item.name, self.table.id)
+
+
+    # def total(self):
+    #     return Items.objects.filter(item)

@@ -2,15 +2,24 @@
 
 {% block content %}
 <div class="container">
-
-
-  {% for order in order %}
-
-  Table:
-  {{order.table.id}}
-  {{order.item}}
-  {{order.notes}}
-  <br>
-  {% endfor %}
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="name" value="Submit">
+  </form>
 </div>
 {% endblock %}
+
+
+
+
+
+
+{% for order in order %}
+
+Table:
+{{order.table.id}}
+{{order.item}}
+{{order.notes}}
+<br>
+{% endfor %}

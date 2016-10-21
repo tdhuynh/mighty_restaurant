@@ -21,13 +21,28 @@ class UserCreateView(CreateView):
 
 class OrderCreateView(CreateView):
     model = Order
-    success_url = "/"
-    fields = ('item', 'table', 'notes')
+    fields = ('item', 'notes')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["order"] = Order.objects.all()
         return context
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        instance.table = Table.objects.get(id=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('table_detail_view', args=[int(self.kwargs['pk'])])
+
+
+class OrderUpdateView(UpdateView):
+    model = Order
+    success_url = reverse_lazy('table_create_view')
+    fields = ('item', 'notes')
+
 
 class ProfileUpdateView(UpdateView):
     template_name = 'profile.html'

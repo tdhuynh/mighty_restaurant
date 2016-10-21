@@ -22,7 +22,7 @@
         {% if not request.user.is_authenticated %}
       <li><a href="{% url 'login' %}">Login</a></li>
         {% else %}
-      <li><a href="{% url 'logout' %}?next={% url 'order_create_view' %}">Logout</a></li>
+      <li><a href="{% url 'logout' %}?next={% url 'home_view' %}">Logout</a></li>
       {% endif %}
       <li><a href="#">Welcome, {{ request.user }}</a></li>
       <hr>

@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-  <a href="{#}">{{ table.id }}</a>
-{% for order in order_list %}
-  {{ order. }}
+
+<a href="{% url 'order_create_view' object.id %}">New Order</a>
+
+{% for order in object.all_orders %}
+<a href="{% url 'order_update_view' order.id %}">Update Order</a>
+
+  {{ order.item }}
+  {{ order.notes }}
+  {{ order.item.price }}
 {% endfor %}
+  {{ object.paid }}
+  {{ object.total }}
 
 {% endblock %}

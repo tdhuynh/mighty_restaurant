@@ -8,7 +8,7 @@
   <input type="submit" name="" value="Create Table">
 </form>
 {% for table in table_list %}
-  <a href="{#}">{{ table.id }}</a>
+  <a href="{% url 'table_detail_view' table.id %}">{{ table.id }}</a>
 {% endfor %}
 </div>
 {% endblock %}
