@@ -2,7 +2,7 @@
 {% block content %}
 
 
-{% for order in object.cook_orders %}
+{% for order in object_list%}
 <a href="{% url 'cook_update_view' order.id %}">Complete</a>
   {{ order.id }}
   {{ order.item }}

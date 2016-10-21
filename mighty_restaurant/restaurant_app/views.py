@@ -78,17 +78,17 @@ class TableDetailView(DetailView):
         return context
 
 
-class CookDetailView(DetailView):
+class CookListView(ListView):
+    template_name = 'cook_order.html'
     model = Order
 
-
+    def get_queryset(self):
+        return Order.objects.filter(completed=False)
 
 class CookUpdateView(UpdateView):
     model = Order
     fields = ("completed",)
-
-    def get_success_url(self, **kwargs):
-        return reverse_lazy('cook_detail_view', args=[int(self.kwargs['pk'])])
+    success_url = reverse_lazy('cook_list_view')
 
     # def get_object(self):
     #     if  self.request.user.profile.is_cook:

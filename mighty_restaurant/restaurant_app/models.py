@@ -70,8 +70,6 @@ class Order(models.Model):
     notes = models.TextField(null=True, blank=True)
     completed = models.BooleanField(default=False)
 
-    def cook_orders(self):
-        return Order.objects.all()
 
     # def __str__(self):
     #     return "{} {}".format(self.item.name, self.table.id)
