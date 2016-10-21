@@ -76,3 +76,20 @@ class TableDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["order_list"] = Order.objects.all()
         return context
+
+
+class CookDetailView(DetailView):
+    pass
+
+class CookUpdateView(UpdateView):
+    model = Order
+    fields = ("completed",)
+    success_url = reverse_lazy('cook_update_view')
+
+    def get_object(self):
+        if  self.request.user.profile.is_cook:
+            return Order.objects.get(user=self.request.user)
+
+    def get_queryset(self):
+        if  self.request.user.profile.is_cook:
+            return Order.objects.all()
