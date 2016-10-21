@@ -19,10 +19,22 @@ def create_user_profile(**kwargs):
 
 class Profile(models.Model):
     user = models.OneToOneField('auth.User')
-    access_level = models.CharField(max_length=1, default='s', choices=ACCESS_LEVELS)
+    access_level = models.CharField(max_length=1, choices=ACCESS_LEVELS)
 
     def __str__(self):
         return self.user.username
+
+    @property
+    def is_owner(self):
+        return self.access_level == 'o'
+
+    @property
+    def is_server(self):
+        return self.access_level == 's'
+
+    @property
+    def is_cook(self):
+        return self.access_level == 'c'
 
 
 class Item(models.Model):
