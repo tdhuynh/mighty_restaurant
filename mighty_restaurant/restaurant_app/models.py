@@ -54,3 +54,5 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+        return self.item
+        return self.table
