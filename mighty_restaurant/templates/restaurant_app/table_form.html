@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<form class="" action="" method="post">
+  {% csrf_token %}
+  {{ from.as_p }}
+  <input type="submit" name="" value="Create Table">
+</form>
+{% for table in table_list %}
+  <a href="{#}"></a>{{ table.id }}
+{% endfor %}
+</div>
+{% endblock %}
+<!-- <a href="{% url 'order_create_view' table.id %}">{{ table.id }}</a> -->
