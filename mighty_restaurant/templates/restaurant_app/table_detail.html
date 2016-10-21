@@ -9,15 +9,15 @@
 
 
 
-<a href="{% url 'order_create_view' object.id %}" class="btn btn-default btn-md" role="button">New Order</a>
-<a href="{% url 'table_create_view' %}" class="btn btn-default btn-md" role="button">Back</a>
+<a href="{% url 'order_create_view' object.id %}" class="btn btn-success btn-md" role="button">New Order</a>
+<a href="{% url 'table_create_view' %}" class="btn btn-info btn-md" role="button">Back</a>
 </div>
 {% for order in object.all_orders %}
   <hr>
   {{ order.item }}
   {{ order.notes }}
   {{ order.item.price }}
-  <a href="{% url 'order_update_view' order.id %}">Update Order</a>
+  <a href="{% url 'order_update_view' order.id %}" class="btn btn-warning btn-sm" role="button">Update Order</a>
   <br>
 {% endfor %}
 </div>
