@@ -1,33 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 {% for order in object_list%}
+
+
+
+<div class="row">
+  <div class="col-md-8">
 <div class="panel panel-default">
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-8"></div>
-        <div class="col-md-10"></div>
-          <div class="btn-toolbar" role="group">
-            <a href="{% url 'cook_update_view' order.id %}" class="btn btn-success btn-lg" role="button">Complete</a>
+  <div class="panel-heading">
+        <div class="btn-toolbar" role="group">
+        <a href="{% url 'cook_update_view' order.id %}" class="btn btn-success btn-lg" role="button">Complete</a>
+        <button type="button" class="btn btn-info btn-md" role="button">Order {{ order.id }}</button>
+        <button type="button" class="btn btn-warning btn-sm" role="button">Table {{ order.table.id }}</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-2">
+            {{ order.item }}
+            {{ order.notes }}
+            {{ order.item.price }}
+            <br>
           </div>
-          <div class="col-md-4">
-              <div class="col-md-4">
-              <h3><span class="label label-info">Order {{ order.id }}</span></h3>
-              <h4><span class="label label-danger">Table {{ order.table.id }}</span></h4>
-              <br>
-
-            </div>
-</div>
-<div class="col-md-4">
-
-
-          {{ order.item }}
-          {{ order.notes }}
-          {{ order.item.price }}
-          <br>
-</div>
+        </div>
     </div>
   </div>
+  </div>
 </div>
+
+
 {% endfor %}
   {{ object.paid }}
   {{ object.total }}
