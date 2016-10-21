@@ -31,11 +31,11 @@
     </div>
     <div class="container">
       <h1>Welcome to Goodburger!</h1>
-
+    <hr>
+    <a href="{% url 'table_create_view' %}">View Tables</a>
+    <a href="{% url 'cook_list_view' %}">Cook View</a>
     </div>
     <div class="container">
-
-
     {% block content %}
 
     {% endblock %}

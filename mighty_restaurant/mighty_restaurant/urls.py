@@ -4,8 +4,6 @@ from restaurant_app.views import UserCreateView, OrderCreateView, HomeView, \
                                  ProfileUpdateView, TableCreateView, TableDetailView, \
                                  OrderUpdateView, CookUpdateView, CookListView
 
-
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('django.contrib.auth.urls')),

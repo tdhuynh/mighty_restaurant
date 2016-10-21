@@ -2,14 +2,26 @@
 
 {% block content %}
 <div class="container">
-<form class="" action="" method="post">
-  {% csrf_token %}
-  {{ from.as_p }}
-  <input type="submit" name="" value="Create Table">
-</form>
-{% for table in table_list %}
-  <a href="{% url 'table_detail_view' table.id %}">{{ table.id }}</a>
-{% endfor %}
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    {{ from.as_p }}
+    <input type="submit" name="" class="btn btn-primary" value="Create Table">
+  </form>
+</div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+
+
+
+    <div class="btn-toolbar" role="toolbar">
+    {% for table in table_list %}
+      <a href="{% url 'table_detail_view' table.id %}" class="btn btn-info btn-lg" role="button">{{ table.id }}</a>
+    {% endfor %}
+        </div>
+  </div>
+  </div>
 </div>
 {% endblock %}
 <!-- <a href="{% url 'order_create_view' table.id %}">{{ table.id }}</a> -->

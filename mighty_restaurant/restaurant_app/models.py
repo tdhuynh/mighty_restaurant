@@ -63,6 +63,7 @@ class Table(models.Model):
     def __str__(self):
         return str(self.id)
 
+
 class Order(models.Model):
     user = models.ForeignKey('auth.User')
     item = models.ForeignKey(Item)
@@ -70,10 +71,8 @@ class Order(models.Model):
     notes = models.TextField(null=True, blank=True)
     completed = models.BooleanField(default=False)
 
-
     # def __str__(self):
     #     return "{} {}".format(self.item.name, self.table.id)
-
 
     # def total(self):
     #     return Items.objects.filter(item)

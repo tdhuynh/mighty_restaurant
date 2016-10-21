@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="btn-toolbar" role="toolbar">
 
-<a href="{% url 'order_create_view' object.id %}">New Order</a>
 
+
+
+
+
+<a href="{% url 'order_create_view' object.id %}" class="btn btn-default btn-md" role="button">New Order</a>
+<a href="{% url 'table_create_view' %}" class="btn btn-default btn-md" role="button">Back</a>
+</div>
 {% for order in object.all_orders %}
-<a href="{% url 'order_update_view' order.id %}">Update Order</a>
-
+  <hr>
   {{ order.item }}
   {{ order.notes }}
   {{ order.item.price }}
+  <a href="{% url 'order_update_view' order.id %}">Update Order</a>
+  <br>
 {% endfor %}
-  {{ object.paid }}
-  {{ object.total }}
-
+</div>
+</div>
+<hr>
+Bill Paid: {{ object.paid }}
+<br>
+Total Bill: {{ object.total }}
 {% endblock %}
