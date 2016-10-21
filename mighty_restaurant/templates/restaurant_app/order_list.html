@@ -10,13 +10,21 @@
             <a href="{% url 'cook_update_view' order.id %}" class="btn btn-success btn-lg" role="button">Complete</a>
           </div>
           <div class="col-md-4">
-            <p>
-          {{ order.id }}
+              <div class="col-md-4">
+              <h3><span class="label label-info">Order {{ order.id }}</span></h3>
+              <h4><span class="label label-danger">Table {{ order.table.id }}</span></h4>
+              <br>
+
+            </div>
+</div>
+<div class="col-md-4">
+
+
           {{ order.item }}
           {{ order.notes }}
           {{ order.item.price }}
-          </p>
-          </div>
+          <br>
+</div>
     </div>
   </div>
 </div>
