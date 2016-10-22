@@ -108,10 +108,11 @@ class TableDetailView(DetailView):
 # IDK WHY THIS ISN'T WORKING :(
 class TableUpdateView(UpdateView):
     model = Table
+    success_url = reverse_lazy("table_create_view")
     fields = ('paid',)
 
-    # def get_queryset(self):
-    #     return Table.objects.filter(paid=False)
+    def get_queryset(self):
+        return Table.objects.filter(paid=False)
 
 
 class CookListView(ListView):
