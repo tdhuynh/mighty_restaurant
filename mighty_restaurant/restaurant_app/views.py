@@ -69,6 +69,7 @@ class TableCreateView(CreateView):
         context["table_list"] = Table.objects.all()
         return context
 
+
 class TableDetailView(DetailView):
     model = Table
 
@@ -84,6 +85,7 @@ class CookListView(ListView):
 
     def get_queryset(self):
         return Order.objects.filter(completed=False)
+
 
 class CookUpdateView(UpdateView):
     model = Order

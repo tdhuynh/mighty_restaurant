@@ -47,6 +47,8 @@
                   {% else %}
                     <a href="{% url 'cook_list_view' %}" class="btn btn-primary btn-lg" role="button">Cook View</a>
                   {% endif %}
+                {% else %}
+                  <a href="{% url 'login' %}" class="btn btn-default btn-sm" role="button">Login to Access System</a>
                 {% endif %}
               </div>
             </div>
