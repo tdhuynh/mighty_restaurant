@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="" value="Submit">
+  </form>
+
+  {% for item in item_list %}
+  <a href="{% url 'item_update_view' item.id %}">Update Menu Item</a>
+    <br>
+    {{ item }}
+    <br>
+    {{ item.description }}
+    <br>
+    {{ item.price }}
+    <br><hr>
+  {% endfor %}
+{% endblock %}

@@ -38,11 +38,18 @@ class Profile(models.Model):
         return self.access_level == 'c'
 
 
+
+GROUP = [
+    ('a', 'appetizer'),
+    ('e', 'entree'),
+    ('b', 'beverage'),
+    ('d', 'dessert'),
+    ('s', 'side'),
+]
+
 class Item(models.Model):
     name = models.CharField(max_length=50)
-    appetizer = models.BooleanField(default=False)
-    entree = models.BooleanField(default=False)
-    drink = models.BooleanField(default=False)
+    group = models.CharField(max_length=1, choices=GROUP)
     description = models.CharField(max_length=150, null=True, blank=True)
     price = models.FloatField()
 
@@ -51,7 +58,7 @@ class Item(models.Model):
 
 
 class Table(models.Model):
-    paid = models.BooleanField(default=False)
+    paid = models.BooleanField()
 
     def all_orders(self):
         return Order.objects.filter(table=self)

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -17,6 +17,22 @@ class UserCreateView(CreateView):
     model = User
     form_class = UserCreationForm
     success_url = reverse_lazy("profile_update_view")
+
+
+class ItemCreateView(CreateView):
+    model = Item
+    fields = ('name', 'group', 'description', 'price')
+    success_url = reverse_lazy('item_create_view')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["item_list"] = Item.objects.all()
+        return context
+
+class ItemUpdateView(UpdateView):
+    model = Item
+    fields = ('name', 'group', 'description', 'price')
+    success_url = reverse_lazy('item_create_view')
 
 
 class OrderCreateView(CreateView):
@@ -42,6 +58,16 @@ class OrderUpdateView(UpdateView):
     model = Order
     success_url = reverse_lazy('table_create_view')
     fields = ('item', 'notes')
+
+
+class OrderDeleteView(DeleteView):
+    model = Order
+    success_url = reverse_lazy('table_create_view')
+
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_server:
+            return Order.objects.all()
+        return []
 
 
 class ProfileUpdateView(UpdateView):
@@ -77,6 +103,15 @@ class TableDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["order_list"] = Order.objects.all()
         return context
+
+
+# IDK WHY THIS ISN'T WORKING :(
+class TableUpdateView(UpdateView):
+    model = Table
+    fields = ('paid',)
+
+    # def get_queryset(self):
+    #     return Table.objects.filter(paid=False)
 
 
 class CookListView(ListView):

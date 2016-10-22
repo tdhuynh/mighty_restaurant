@@ -9,15 +9,23 @@
 {% for order in object.all_orders %}
   <hr>
   {{ order.item }}
-  {{ order.notes }}
-  {{ order.item.price }}
-  <a href="{% url 'order_update_view' order.id %}" class="btn btn-warning btn-sm" role="button">Update Order</a>
   <br>
+  {{ order.notes }}
+  <br>
+  {{ order.item.price }}
+  <a href="{% url 'order_update_view' order.id %}" class="btn btn-warning btn-sm pull-right" role="button">Update Order</a>
+  <br><br>
+  <a href="{% url 'order_delete_view' order.id %}" class="btn btn-danger btn-sm pull-right" role="button">Delete Order</a>
+  <br><br>
 {% endfor %}
 </div>
+<div class="panel-heading">
+  Bill Paid: {{ object.paid }}
+  <br>
+  Total Bill: {{ object.total }}
+  <div class="pull-right">
+    <a href="{% url 'table_update_view' object.id %}">Pay Order</a>
+  </div>
 </div>
-<hr>
-Bill Paid: {{ object.paid }}
-<br>
-Total Bill: {{ object.total }}
+</div>
 {% endblock %}
