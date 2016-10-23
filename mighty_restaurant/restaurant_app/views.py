@@ -116,7 +116,6 @@ class ProfileUpdateView(UpdateView):
     #         raise PermissionDenied # HTTP 403
 
 
-
 class TableCreateView(CreateView):
     model = Table
     fields = ('paid',)
@@ -131,7 +130,6 @@ class TableCreateView(CreateView):
     #     if not self.request.user.profile.access_level == 'c':
     #         return Table.objects.all()
     #     raise Exception("YOU CAN'T BE HERE")
-
 
 
 class TableDetailView(DetailView):
@@ -158,6 +156,16 @@ class TableUpdateView(UpdateView):
     def get_queryset(self):
         if self.request.user.profile.is_owner or self.request.user.profile.is_server:
             return Table.objects.filter(paid=False)
+
+
+class TableDeleteView(DeleteView):
+    model = Table
+    success_url = reverse_lazy("table_create_view")
+
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_server:
+            return Table.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
 
 
 class CookListView(ListView):

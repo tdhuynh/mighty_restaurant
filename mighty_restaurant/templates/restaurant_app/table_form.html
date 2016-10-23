@@ -13,11 +13,15 @@
   </div>
     <hr>
     <div class="col-md-6">
-
     <div class="btn-toolbar" role="toolbar">
       {% for table in table_list %}
         {% if table.paid == False %}
-        <a href="{% url 'table_detail_view' table.id %}" class="btn btn-info btn-lg" role="button"><h1>{{ table.id }}</h1></a>
+        <div class="col-md-2">
+        <br>
+        <a href="{% url 'table_delete_view' table.id %}" class="btn btn-warning btn-sm">delete {{table.id}}</a> </div>
+        <div class="col-md-2">
+          <br>
+        <a href="{% url 'table_detail_view' table.id %}" class="btn btn-info btn-lg" role="button"><h1>{{ table.id }}</h1></a></div>
         {% endif %}
       {% endfor %}
     </div>
