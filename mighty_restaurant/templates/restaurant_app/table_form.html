@@ -4,7 +4,7 @@
 {% if request.user.profile.is_owner or request.user.profile.is_server %}
 <div class="container">
   <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
   <form class="" action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -12,18 +12,22 @@
   </form>
   </div>
     <hr>
-    <div class="col-md-6">
+    <div class="col-md-8">
+    <div class="panel panel-default">
+    <div class="panel-body">
     <div class="btn-toolbar" role="toolbar">
       {% for table in table_list %}
         {% if table.paid == False %}
         <div class="col-md-2">
         <br>
-        <a href="{% url 'table_delete_view' table.id %}" class="btn btn-danger btn-sm">delete {{table.id}}</a> </div>
+        <a href="{% url 'table_delete_view' table.id %}" class="btn btn-danger btn-sm">Delete {{table.id}}</a> </div>
         <div class="col-md-2">
           <br>
         <a href="{% url 'table_detail_view' table.id %}" class="btn btn-info btn-lg" role="button"><h1>{{ table.id }}</h1></a></div>
         {% endif %}
       {% endfor %}
+    </div>
+    </div>
     </div>
   </div>
 </div>
