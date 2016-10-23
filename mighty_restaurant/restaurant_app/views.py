@@ -29,10 +29,21 @@ class ItemCreateView(CreateView):
         context["item_list"] = Item.objects.all()
         return context
 
+    def get_queryset(self):
+        if self.request.user.profile.is_owner:
+            return Item.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
+
+
 class ItemUpdateView(UpdateView):
     model = Item
     fields = ('name', 'group', 'description', 'price')
     success_url = reverse_lazy('item_create_view')
+
+    def get_queryset(self):
+        if self.request.user.profile.is_owner:
+            return Item.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
 
 
 class OrderCreateView(CreateView):
@@ -53,11 +64,21 @@ class OrderCreateView(CreateView):
     def get_success_url(self, **kwargs):
         return reverse_lazy('table_detail_view', args=[int(self.kwargs['pk'])])
 
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_server:
+            return Order.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
+
 
 class OrderUpdateView(UpdateView):
     model = Order
     success_url = reverse_lazy('table_create_view')
     fields = ('item', 'notes')
+
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_server:
+            return Order.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
 
 
 class OrderDeleteView(DeleteView):
@@ -67,7 +88,7 @@ class OrderDeleteView(DeleteView):
     def get_queryset(self):
         if self.request.user.profile.is_owner or self.request.user.profile.is_server:
             return Order.objects.all()
-        return []
+        raise Exception("YOU CAN'T BE HERE")
 
 
 class ProfileUpdateView(UpdateView):
@@ -85,6 +106,7 @@ class ProfileUpdateView(UpdateView):
     #         raise PermissionDenied # HTTP 403
 
 
+
 class TableCreateView(CreateView):
     model = Table
     fields = ('paid',)
@@ -95,6 +117,12 @@ class TableCreateView(CreateView):
         context["table_list"] = Table.objects.all()
         return context
 
+    # def get_queryset(self):
+    #     if not self.request.user.profile.access_level == 'c':
+    #         return Table.objects.all()
+    #     raise Exception("YOU CAN'T BE HERE")
+
+
 
 class TableDetailView(DetailView):
     model = Table
@@ -104,8 +132,14 @@ class TableDetailView(DetailView):
         context["order_list"] = Order.objects.all()
         return context
 
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_server:
+            return Table.objects.all()
+        else:
+            raise Exception("You do not have access")
+        # return get_queryset
 
-# IDK WHY THIS ISN'T WORKING :(
+
 class TableUpdateView(UpdateView):
     model = Table
     success_url = reverse_lazy("table_create_view")
@@ -113,6 +147,10 @@ class TableUpdateView(UpdateView):
 
     def get_queryset(self):
         return Table.objects.filter(paid=False)
+
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_server:
+            return Table.objects.all()
 
 
 class CookListView(ListView):
@@ -122,11 +160,21 @@ class CookListView(ListView):
     def get_queryset(self):
         return Order.objects.filter(completed=False)
 
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_cook:
+            return Order.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
+
 
 class CookUpdateView(UpdateView):
     model = Order
     fields = ("completed",)
     success_url = reverse_lazy('cook_list_view')
+
+    def get_queryset(self):
+        if self.request.user.profile.is_owner or self.request.user.profile.is_cook:
+            return Order.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
 
     # def get_object(self):
     #     if  self.request.user.profile.is_cook:

@@ -3,12 +3,13 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.db.models import Sum
 
+
+
 ACCESS_LEVELS = [
     ('o', 'owner'),
     ('s', 'server'),
     ('c', 'cook'),
 ]
-
 
 @receiver(post_save, sender='auth.User')
 def create_user_profile(**kwargs):

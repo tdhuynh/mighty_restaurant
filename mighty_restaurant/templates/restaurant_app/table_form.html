@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if self.request.user.profile.is_owner or self.request.user.profile.is_server %}
 <div class="container">
   <form class="" action="" method="post">
     {% csrf_token %}
@@ -23,5 +24,8 @@
   </div>
   </div>
 </div>
+{% else %}
+Permission Denied - Access Forbidden.
+{% endif %}
 {% endblock %}
 <!-- <a href="{% url 'order_create_view' table.id %}">{{ table.id }}</a> -->
