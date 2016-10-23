@@ -41,12 +41,15 @@
               <div class="btn-toolbar" role="toolbar">
                 {% if request.user.is_authenticated %}
                   {% if request.user.profile.is_owner %}
+                    <h3 align='center'>Owner</h3>
                     <a href="{% url 'table_create_view' %}" class="btn btn-primary btn-lg btn-block" role="button">View Tables</a>
                     <a href="{% url 'cook_list_view' %}" class="btn btn-primary btn-lg btn-block" role="button">Cook View</a>
                     <a href="{% url 'item_create_view' %}" class="btn btn-primary btn-lg btn-block" role="button">New Menu Item</a>
                   {% elif request.user.profile.is_server %}
+                  <h3 align='center'>Server</h3>
                     <a href="{% url 'table_create_view' %}" class="btn btn-primary btn-lg btn-block" role="button">View Tables</a>
                   {% else %}
+                    <h3 align='center'>Cook</h3>
                     <a href="{% url 'cook_list_view' %}" class="btn btn-primary btn-lg btn-block" role="button">Cook View</a>
                   {% endif %}
                 {% else %}
