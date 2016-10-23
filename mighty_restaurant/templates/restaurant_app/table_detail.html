@@ -3,29 +3,27 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="btn-toolbar" role="toolbar">
-<a href="{% url 'order_create_view' object.id %}" class="btn btn-success btn-md" role="button">New Order</a>
-<a href="{% url 'table_create_view' %}" class="btn btn-info btn-md" role="button">Back</a>
-</div>
+    <a href="{% url 'order_create_view' object.id %}" class="btn btn-info btn-lg pull-right" role="button">Add Order</a>
+    <a href="{% url 'table_create_view' %}" class="btn btn-default btn-lg pull-left" role="button">Back to Tables</a>
+    <h4 align='center'>Table {{ object.id }}</h4>
+    </div>
+  </div>
+  <div class="panel-body">
 {% for order in object.all_orders %}
   <hr>
-  {{ order.item }}
-  <br>
-  {{ order.notes }}
-  <br>
-  {{ order.item.price }}
-  <a href="{% url 'order_update_view' order.id %}" class="btn btn-warning btn-sm pull-right" role="button">Update Order</a>
-  <br><br>
-  <a href="{% url 'order_delete_view' order.id %}" class="btn btn-danger btn-sm pull-right" role="button">Delete Order</a>
+  <h3>{{ order.item }}</h3>
+  <h4 style="color:red;">{{ order.notes }}</h4>
+  <h4>${{ order.item.price }}</h4>
+  <a href="{% url 'order_update_view' order.id %}" class="btn btn-warning btn-lg pull-right" role="button">Update Order</a>
+  <br><br><br>
+  <a href="{% url 'order_delete_view' order.id %}" class="btn btn-danger btn-lg pull-right" role="button">Delete Order</a>
   <br><br>
 {% endfor %}
 </div>
-<div class="panel-heading">
-  Bill Paid: {{ object.paid }}
-  <br>
-  Total Bill: {{ object.total }}
-  <div class="pull-right">
-    <a href="{% url 'table_update_view' object.id %}">Pay Order</a>
-  </div>
+<div class="panel-footer">
+  <a href="{% url 'table_update_view' object.id %}" class="btn btn-success btn-lg pull-right" role="button">Pay Order</a>
+  <h4>Total: ${{ object.total }}</h4>
+  <br><br>
 </div>
 </div>
 {% endblock %}

@@ -2,11 +2,21 @@
 
 {% block content %}
 {% if not request.user.profile.is_cook %}
-  <form class="" action="" method="post">
+<div class="row">
+<div class="col-md-6">
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form class="" action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" name="" value="Submit">
+    <input type="submit" class="btn btn-success btn-lg pull-right" role="button" value="Submit">
   </form>
+</div>
+</div>
+</div>
+</div>
+
 {% else %}
   Permission Denied - Access Forbidden.
 {% endif %}
@@ -14,7 +24,7 @@
 
 
 
-<div class="container">
+<!-- <div class="container">
   {% for order in order %}
 
   Table:
@@ -25,4 +35,4 @@
   {% endfor %}
 
 
-  </div>
+  </div> -->

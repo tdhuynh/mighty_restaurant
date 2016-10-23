@@ -2,23 +2,35 @@
 
 {% block content %}
 {% if request.user.profile.is_owner %}
-  <form class="" action="" method="post">
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form class="" action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" name="" value="Submit">
+    <input type="submit" class="btn btn-success btn-lg" value="Submit">
   </form>
+  </div>
+</div>
 
   {% for item in item_list %}
-  <a href="{% url 'item_update_view' item.id %}">Update Menu Item</a>
-    <br>
-    {{ item }}
-    <br>
-    {{ item.description }}
-    <br>
-    {{ item.price }}
-    <br><hr>
+  <div class="panel panel-default">
+    <div class="list-group">
+      <a href="{% url 'item_update_view' item.id %}" class="list-group-item list-group-item-info">Update Menu Item</a>
+    </div>
+    <div class="panel-body">
+      <h4>{{ item }}</h4>
+      <br>
+      <h5>{{ item.description }}</h5>
+      <br>
+      <h5>${{ item.price }}</h5>
+      <br><hr>
+    </div>
+  </div>
+
   {% endfor %}
 {% else %}
   Permission Denied - Access Forbidden.
 {% endif %}
+
 {% endblock %}
