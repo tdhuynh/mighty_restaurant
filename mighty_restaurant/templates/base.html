@@ -23,34 +23,34 @@
       <li><a href="{% url 'login' %}">Login</a></li>
         {% else %}
       <li><a href="{% url 'logout' %}?next={% url 'home_view' %}">Logout</a></li>
+      <li><p class="navbar-text">Welcome, <b>{{ request.user }}</b></p></li>
       {% endif %}
-      <li><a href="#">Welcome, {{ request.user }}</a></li>
+
       <hr>
         </div>
       </div>
     </div>
-<div class="container">
-<h1>Welcome to Goodburger!</h1></div>
-    <hr>
     <div class="container">
       <div class="row">
+        <div class="col-md-4">
+          <h1>Welcome to Goodburger!</h1>
+        </div>
         <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="btn-toolbar" role="toolbar">
                 {% if request.user.is_authenticated %}
                   {% if request.user.profile.is_owner %}
-                    <a href="{% url 'table_create_view' %}" class="btn btn-primary btn-lg" role="button">View Tables</a>
-                    <a href="{% url 'cook_list_view' %}" class="btn btn-primary btn-lg" role="button">Cook View</a>
-                    <a href="{% url 'item_create_view' %}" class="btn btn-primary btn-lg" role="button">New Menu Item</a>
-
+                    <a href="{% url 'table_create_view' %}" class="btn btn-primary btn-lg btn-block" role="button">View Tables</a>
+                    <a href="{% url 'cook_list_view' %}" class="btn btn-primary btn-lg btn-block" role="button">Cook View</a>
+                    <a href="{% url 'item_create_view' %}" class="btn btn-primary btn-lg btn-block" role="button">New Menu Item</a>
                   {% elif request.user.profile.is_server %}
-                    <a href="{% url 'table_create_view' %}" class="btn btn-primary btn-lg" role="button">View Tables</a>
+                    <a href="{% url 'table_create_view' %}" class="btn btn-primary btn-lg btn-block" role="button">View Tables</a>
                   {% else %}
-                    <a href="{% url 'cook_list_view' %}" class="btn btn-primary btn-lg" role="button">Cook View</a>
+                    <a href="{% url 'cook_list_view' %}" class="btn btn-primary btn-lg btn-block" role="button">Cook View</a>
                   {% endif %}
                 {% else %}
-                  <a href="{% url 'login' %}" class="btn btn-default btn-sm" role="button">Login to Access System</a>
+                  <a href="{% url 'login' %}" class="btn btn-default btn-lg btn-block" role="button">Login to Access System</a>
                 {% endif %}
               </div>
             </div>

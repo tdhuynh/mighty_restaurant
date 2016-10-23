@@ -146,11 +146,8 @@ class TableUpdateView(UpdateView):
     fields = ('paid',)
 
     def get_queryset(self):
-        return Table.objects.filter(paid=False)
-
-    def get_queryset(self):
         if self.request.user.profile.is_owner or self.request.user.profile.is_server:
-            return Table.objects.all()
+            return Table.objects.filter(paid=False)
 
 
 class CookListView(ListView):
@@ -158,11 +155,8 @@ class CookListView(ListView):
     model = Order
 
     def get_queryset(self):
-        return Order.objects.filter(completed=False)
-
-    def get_queryset(self):
         if self.request.user.profile.is_owner or self.request.user.profile.is_cook:
-            return Order.objects.all()
+            return Order.objects.filter(completed=False)
         raise Exception("YOU CAN'T BE HERE")
 
 
@@ -179,11 +173,7 @@ class CookUpdateView(UpdateView):
     # def get_object(self):
     #     if  self.request.user.profile.is_cook:
     #         return Order.objects.get(user=self.request.user)
-    #
-    # def get_queryset(self):
-    #     if  self.request.user.profile.is_cook:
-    #         return Order.objects.all()
-
+    
     # def form_valid(self, form):
     #     instance = form.save(commit=False)
     #     instance.user = self.request.user

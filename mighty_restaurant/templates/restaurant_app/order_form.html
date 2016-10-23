@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if self.request.user.profile.is_owner or self.request.user.profile.is_server %}
+{% if not request.user.profile.is_cook %}
   <form class="" action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" name="" value="Submit">
   </form>
 {% else %}
-Permission Denied - Access Forbidden.
+  Permission Denied - Access Forbidden.
 {% endif %}
 {% endblock %}
 
