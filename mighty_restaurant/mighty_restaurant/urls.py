@@ -4,7 +4,7 @@ from restaurant_app.views import UserCreateView, OrderCreateView, HomeView, \
                                  ProfileUpdateView, TableCreateView, TableDetailView, \
                                  OrderUpdateView, CookUpdateView, CookListView, \
                                  TableUpdateView, ItemCreateView, ItemUpdateView, \
-                                 OrderDeleteView
+                                 OrderDeleteView, ItemDeleteView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home_view'),
     url(r'^item/$', ItemCreateView.as_view(), name='item_create_view'),
     url(r'^item/(?P<pk>\d+)/update/$', ItemUpdateView.as_view(), name='item_update_view'),
+    url(r'^item/(?P<pk>\d+)/delete/$', ItemDeleteView.as_view(), name='item_delete_view'),
     url(r'^table/(?P<pk>\d+)/order/$', OrderCreateView.as_view(), name='order_create_view'),
     url(r'^order/(?P<pk>\d+)/update$', OrderUpdateView.as_view(), name='order_update_view'),
     url(r'^order/(?P<pk>\d+)/delete$', OrderDeleteView.as_view(), name='order_delete_view'),

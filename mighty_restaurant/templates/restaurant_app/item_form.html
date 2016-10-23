@@ -17,6 +17,7 @@
   <div class="panel panel-default">
     <div class="list-group">
       <a href="{% url 'item_update_view' item.id %}" class="list-group-item list-group-item-info">Update Menu Item</a>
+      <a href="{% url 'item_delete_view' item.id %}" class="list-group-item list-group-item-info">Delete Menu Item</a>
     </div>
     <div class="panel-body">
       <h4>{{ item }}</h4>
@@ -25,6 +26,7 @@
       <br>
       <h5>${{ item.price }}</h5>
       <br><hr>
+          Item: {{ item.id }}
     </div>
   </div>
 

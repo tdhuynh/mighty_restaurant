@@ -46,6 +46,16 @@ class ItemUpdateView(UpdateView):
         raise Exception("YOU CAN'T BE HERE")
 
 
+class ItemDeleteView(DeleteView):
+    model = Item
+    success_url = reverse_lazy('item_create_view')
+
+    def get_queryset(self):
+        if self.request.user.profile.is_owner:
+            return Item.objects.all()
+        raise Exception("YOU CAN'T BE HERE")
+
+
 class OrderCreateView(CreateView):
     model = Order
     fields = ('item', 'notes')
@@ -173,7 +183,7 @@ class CookUpdateView(UpdateView):
     # def get_object(self):
     #     if  self.request.user.profile.is_cook:
     #         return Order.objects.get(user=self.request.user)
-    
+
     # def form_valid(self, form):
     #     instance = form.save(commit=False)
     #     instance.user = self.request.user
