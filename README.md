@@ -1,6 +1,6 @@
 # mighty_restaurant
 
-This was a partner assignment to simulate an environment where we work with others on the same project.
+This was a partner assignment to emulate an environment where we work with others on the same project.
 
 # Objective
 * Break a large project into manageable units
